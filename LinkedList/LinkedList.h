@@ -39,13 +39,15 @@ public:
     void insertAfter(const T& ref, const T& afterThis);  //
     void insertBefore(const T& ref, const T& beforeThis); //
 
+    Node<T> *find(const T& ref);
+
     /*
      * Getters
      * */
     int size(); //returns the size of the list.
     const T& front() const; //returns the reference of the item in the front
     const T& back() const; //returns the reference of the item in the back
-
+    bool empty();
     //const at beggining: the returned item cannot be modified.
     //const at end: no instruction inside the function that will modify any of the member variables.
 
@@ -54,6 +56,11 @@ public:
      * */
     void printListFromHead() const;
     void printListFromTail() const;
+
+
+    /*operator overload*/
+    template<typename U>
+    friend std::ostream &operator<<(std::ostream &out, const LinkedList<U> &linkedList);
 };
 
 #include "LinkedList.cpp"
