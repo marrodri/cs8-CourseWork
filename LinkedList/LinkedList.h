@@ -5,7 +5,7 @@
 #ifndef SPLIT_LINKEDLIST_H
 #define SPLIT_LINKEDLIST_H
 #include "Node.h"
-
+#include <iostream>
 //template function
 template<typename T>
 class LinkedList {
@@ -48,7 +48,6 @@ public:
 
     //const at beggining: the returned item cannot be modified.
     //const at end: no instruction inside the function that will modify any of the member variables.
-
 
     /*
      * Printers

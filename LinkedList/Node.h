@@ -8,9 +8,8 @@
 
 //doubly linked list.
 template<typename T>
-class Node {
-private:
-    T *data;
+struct Node {
+    T data;
     Node<T> *previous = nullptr, *next = nullptr;
 };
 

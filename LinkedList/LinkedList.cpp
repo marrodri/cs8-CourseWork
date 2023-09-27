@@ -9,11 +9,19 @@
 #include "LinkedList.h"
 
 
+/**
+ * LinkedList Private functions
+ * */
+
+//done
 template<typename T>
 Node<T> *LinkedList<T>::createNode(const T &item) {
-    return new Node{data:item};
+    Node<T> *newNode = new Node<T>;
+    newNode->data = item;
+    return newNode;
 }
 
+//done
 template<typename T>
 void LinkedList<T>::addFirstNode(const T &item) {
     Node<T> *newNode =createNode(item);
@@ -22,6 +30,7 @@ void LinkedList<T>::addFirstNode(const T &item) {
     _size++;
 }
 
+//done
 template<typename T>
 void LinkedList<T>::push_front(Node<T> *item) {
     //set item->next to the head.
@@ -29,10 +38,11 @@ void LinkedList<T>::push_front(Node<T> *item) {
     //then head-> previous is connected to newNode.
     head->previous = item;
     //then set newNode = head.
-    item = head;
+     head =item;
     _size++;
 }
 
+//done
 template<typename T>
 void LinkedList<T>::push_back(Node<T> *item) {
     //set tail->next to item.
@@ -44,15 +54,16 @@ void LinkedList<T>::push_back(Node<T> *item) {
     _size++;
 }
 
+//base logic done
 template<typename T>
 void LinkedList<T>::insertAfter(Node<T> *ref, const T &afterThis) {
     Node<T> *walker = head;
     Node<T> *tmpNode;
-    //What to do when the afterThis is located at head or tail.
+    //TODO:What to do when the afterThis is located at head or tail.
     while(walker && walker->data != afterThis){
         walker = walker->next;
     }
-    //if afterThis doesn't exist stop the logic and give a message to the user.
+    //TODO:if afterThis doesn't exist stop the logic and give a message to the user.
     tmpNode = walker->next ;
     walker->next = ref;
     ref->previous = walker;
@@ -64,15 +75,15 @@ void LinkedList<T>::insertAfter(Node<T> *ref, const T &afterThis) {
 //Base logic done.
 template<typename T>
 void LinkedList<T>::insertBefore(Node<T> *ref, const T &beforeThis) {
-    //what to do for adding if the goal exists at head or tail.
+    //TODO:what to do for adding if the goal exists at head or tail.
     Node<T> *walker = head;
     Node<T> *tmpNode;
 
-    //search the node.
+    //TODO:search the node.
     while(walker && walker->next->data != beforeThis){
         walker = walker->next;
     }
-    //what to do when no beforeThis exists..
+    //TODO:what to do when no beforeThis exists.
     tmpNode = walker->next;
     walker->next = ref;
     ref->previous = walker;
@@ -81,10 +92,16 @@ void LinkedList<T>::insertBefore(Node<T> *ref, const T &beforeThis) {
     _size++;
 }
 
-//template<typename T>
-//void LinkedList<T>::remove() {
-//    //
-//}
+template<typename T>
+void LinkedList<T>::remove(const T &item) {
+    //
+//    Node<T> *n = find(item);
+//    delete(n);
+}
+
+/**
+ * LinkedList Public Functions
+ **/
 
 template<typename T>
 LinkedList<T>::LinkedList() {
@@ -93,39 +110,44 @@ LinkedList<T>::LinkedList() {
 
 template<typename T>
 void LinkedList<T>::push_front(const T &item) {
-    if(!tail || !head){
+    if(!head){
         addFirstNode(item);
         return ;
     }
     Node<T> *newNode = createNode(item);
     push_front(newNode);
-    _size++;
 }
 
 template<typename T>
 void LinkedList<T>::push_back(const T& item) {
-    if (!tail || !head) {
+    if (!head) {
         addFirstNode(item);
         return ;
     }
     Node<T> *newNode = createNode(item);
     push_front(newNode);
-    _size++;
-}
-
-template<typename T>
-void LinkedList<T>::remove(const T &item) {
 
 }
+
+//template<typename T>
+//void LinkedList<T>::remove(const T &item) {
+//
+//}
 
 template<typename T>
 void LinkedList<T>::pop_front() {
-
+    Node<T> *tmpNode = this->head;
+    head = head->next;
+    head->previous = nullptr;
+    delete(tmpNode);
 }
 
 template<typename T>
 void LinkedList<T>::pop_back() {
-
+    Node<T> *tmpNode = this->tail;
+    tail = tail->previous;
+    tail->next = nullptr;
+    delete(tmpNode);
 }
 
 template<typename T>
@@ -153,5 +175,36 @@ const T &LinkedList<T>::back() const {
     return tail;
 }
 
+/*
+ * Printing functions*/
+template<typename T>
+void LinkedList<T>::printListFromHead() const {
+    Node<T> *walker;
+    walker = head;
+    std::cout << "Printing linked list from head\n";
+    while(walker){
+        std::cout << "[";
+        std::cout << walker->data;
+        std::cout << "]->";
+        walker = walker->next;
+    }
+    std::cout << "nullptr\n";
+    std::cout <<"==========================\n";
+}
+
+template<typename T>
+void LinkedList<T>::printListFromTail() const {
+    Node<T> *walker;
+    walker = tail;
+    std::cout << "Printing linked list from tail\n";
+    while(walker){
+        std::cout << "[";
+        std::cout << walker->data;
+        std::cout << "]->";
+        walker = walker->previous;
+    }
+    std::cout << "nullptr\n";
+    std::cout <<"==========================\n";
+}
 
 #endif

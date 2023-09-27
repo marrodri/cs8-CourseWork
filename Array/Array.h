@@ -24,8 +24,8 @@ public:
     void print();
 
 
-    template<typename U,int size>
-    friend std::ostream &operator<<(std::ostream &out, const Array<U,size> &arr);
+    template<typename U,int _size>
+    friend std::ostream &operator<<(std::ostream &out, const Array<U,_size> &arr);
 };
 
 
