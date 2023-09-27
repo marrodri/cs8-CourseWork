@@ -1,0 +1,6 @@
+#include <iostream>
+#include "FileReader/FileReader.h"
+int main(){
+    std::cout << FileReader<string>::getFileContents() << std::endl;
+
+}
