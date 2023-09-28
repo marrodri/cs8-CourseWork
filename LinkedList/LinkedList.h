@@ -66,3 +66,4 @@ public:
 #include "LinkedList.cpp"
 
 #endif //SPLIT_LINKEDLIST_H
+
