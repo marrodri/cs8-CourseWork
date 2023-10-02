@@ -2,17 +2,19 @@
 // Created by Marthel Rodriguez on 10/2/23.
 //
 
-#ifndef SPLIT_STACK_H
-#define SPLIT_STACK_H
+#ifndef SPLIT_STACKINHERITANCE_H
+#define SPLIT_STACKINHERITANCE_H
+
 #include "../LinkedList/LinkedList.h"
+
 template<typename T>
-class Stack : LinkedList<T> {
+class StackInheritance : LinkedList<T> {
 private:
 
 public:
-    Stack();
+    StackInheritance();
     //pops the front node,
-    T &pop();
+    void pop();
     //push a new node to the stack.
     void push(const T &data);
     //returns the total number of nodes in the stack.
@@ -21,10 +23,7 @@ public:
     using LinkedList<T>::empty;
     //return the front node's data
     T &top();
-
-
     //using keyword: makes a private inherited function to a public one.
-
 
     /**
      * things to consider with a linked list:
@@ -34,6 +33,5 @@ public:
      * -
      * */
 };
-
-
-#endif //SPLIT_STACK_H
+#include "StackInheritance.cpp"
+#endif //SPLIT_STACKINHERITANCE_H
