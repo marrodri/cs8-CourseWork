@@ -39,12 +39,19 @@ void LinkedList<T>::addFirstNode(const T &item) {
 //done
 template<typename T>
 void LinkedList<T>::push_front(Node<T> *item) {
+    if(!head)
+    {
+        head=item;
+        tail=item;
+        return ;
+    }
     //set item->next to the head.
     item->next = head;
     //then head-> previous is connected to newNode.
     head->previous = item;
     //then set newNode = head.
-     head =item;
+     head = item;
+     head->previous = nullptr;
     _size++;
 }
 
@@ -52,11 +59,18 @@ void LinkedList<T>::push_front(Node<T> *item) {
 template<typename T>
 void LinkedList<T>::push_back(Node<T> *item) {
     //set tail->next to item.
+    if(!head){
+
+        head=item;
+        tail=item;
+        return ;
+    }
     tail->next = item;
     //set item->previous to tail.
     item->previous = tail;
     //set tail to item.
     tail = item;
+    tail->next = nullptr;
     _size++;
 }
 
@@ -99,8 +113,17 @@ void LinkedList<T>::insertBefore(Node<T> *ref, const T &beforeThis) {
 
 template<typename T>
 void LinkedList<T>::remove(const T &item) {
-    Node<T> *n = find(item);
-    delete(n);
+    Node<T> *tmpNode;
+    if(item == head->data){
+        std::cout << "removing head!!!\n";
+        tmpNode = head;
+        head = head->next;
+        delete(tmpNode);
+    }
+    else{
+        tmpNode = find(item);
+        delete(tmpNode);
+    }
     _size--;
 }
 
@@ -237,6 +260,37 @@ std::ostream &operator<<(std::ostream &out, const LinkedList<U> &linkedList){
     }
     out << "nullptr\n";
     return out;
+}
+
+/**
+ * Big 3 functions
+ * */
+
+template<typename T>
+LinkedList<T>::~LinkedList() {
+    while(head != nullptr){
+        remove(head->data);
+        std::cout << "data removed from head\n";
+    }
+    this->head = nullptr;
+    this->tail = nullptr;
+}
+
+template<typename T>
+LinkedList<T>::LinkedList(const LinkedList<T> &linkedList) : LinkedList() {
+    *this = linkedList;
+}
+
+//question to ask dave smith: why different templates?
+template<typename T> template<typename U>
+LinkedList<T> &LinkedList<T>::operator=(const LinkedList<U> &linkedList) {
+    this->~LinkedList();
+    Node<U> *walker = linkedList.head;
+    while (walker){
+        this->push_back(walker->data);
+        walker = walker->next;
+    }
+    return *this;
 }
 
 #endif

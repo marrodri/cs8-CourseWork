@@ -61,6 +61,13 @@ public:
     /*operator overload*/
     template<typename U>
     friend std::ostream &operator<<(std::ostream &out, const LinkedList<U> &linkedList);
+
+
+    /**big 3 operators*/
+    //while(head!=nullptr) remove(head);
+    ~LinkedList();
+    LinkedList(const LinkedList<T> &linkedList);
+    template<typename U> LinkedList<T> &operator=(const LinkedList<U> &linkedList);
 };
 
 #include "LinkedList.cpp"

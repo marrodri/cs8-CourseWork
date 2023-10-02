@@ -4,14 +4,14 @@
 int main(){
     LinkedList<int> linkedList;
 
-    int a=1;
-    int b=2;
-    int c=3;
-    int d=6;
-    int e=7;
+    const int a=1;
+    const  int b=2;
+    const  int c=3;
+    const  int d=6;
+    const int e=7;
 
-    int g=21;
-    int ge=22;
+    const  int g=21;
+    const  int ge=22;
 
 
     linkedList.push_front(a);
@@ -79,5 +79,23 @@ int main(){
     linkedList.printListFromTail();
     linkedList.printListFromHead();
 
-    std::cout << linkedList;
+
+    /**copy constructors big 3*/
+     LinkedList<int> copiedList = linkedList;
+
+    std::cout << "Copied List\n";
+    int newData = 500;
+    copiedList.push_back(newData);
+    copiedList.printListFromHead();
+    copiedList.printListFromTail();
+    std::cout << copiedList;
+
+
+    //copied list.
+//    linkedList.push_back(newData);
+    linkedList.printListFromHead();
+    linkedList.printListFromTail();
+
+    return 0;
+    //goes to an infinite loop of destructors.
 }
