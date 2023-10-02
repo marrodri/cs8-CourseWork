@@ -282,10 +282,10 @@ LinkedList<T>::LinkedList(const LinkedList<T> &linkedList) : LinkedList() {
 }
 
 //question to ask dave smith: why different templates?
-template<typename T> template<typename U>
-LinkedList<T> &LinkedList<T>::operator=(const LinkedList<U> &linkedList) {
+template<typename T>
+LinkedList<T> &LinkedList<T>::operator=(const LinkedList<T> &linkedList) {
     this->~LinkedList();
-    Node<U> *walker = linkedList.head;
+    Node<T> *walker = linkedList.head;
     while (walker){
         this->push_back(walker->data);
         walker = walker->next;

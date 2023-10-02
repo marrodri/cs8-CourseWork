@@ -67,7 +67,7 @@ public:
     //while(head!=nullptr) remove(head);
     ~LinkedList();
     LinkedList(const LinkedList<T> &linkedList);
-    template<typename U> LinkedList<T> &operator=(const LinkedList<U> &linkedList);
+    LinkedList<T> &operator=(const LinkedList<T> &linkedList);
 };
 
 #include "LinkedList.cpp"

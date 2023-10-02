@@ -1,6 +1,8 @@
 //
 // Created by Marthel Rodriguez on 10/2/23.
 //
+#ifndef SPLIT_STACKVARIABLE_CPP
+#define SPLIT_STACKVARIABLE_CPP
 
 #include "StackVariable.h"
 
@@ -34,3 +36,4 @@ template<typename T>
 bool StackVariable<T>::empty() {
     return stack.empty();
 }
+#endif
