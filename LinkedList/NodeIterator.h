@@ -6,23 +6,59 @@
 #define SPLIT_NODEITERATOR_H
 
 #include "Node.h"
-
+#include <iterator>
 template<typename T>
-class NodeIterator{
+class NodeIterator: public std::iterator<std::bidirectional_iterator_tag, T> {
 private:
  Node<T> *current;
  //hide the walker, and iterate through the list without exposing the node.
 public:
-    void setCurrentNode();
-    T &getData();
-    void getNext();
-    void getPrevious();
+    NodeIterator();
+    NodeIterator(Node<T>*current = nullptr); // one line code
+    /**
+    * postfix: ++int
+    * ++x -> increment x; return x;
+    */
+    NodeIterator<T> &operator++(int); //two lines
 
     /**
-     * int x=5;
-     * int *p = &x;
-     *
-     * */
+     * prefix: int++
+     * x++ -> copy x; then increment x;
+     * then return copy.
+     */
+    NodeIterator<T> operator++(); //one line or two line
+
+    /*
+     * decrementors*/
+    NodeIterator<T> operator--(int); //
+    NodeIterator<T> &operator--(); //
+
+
+    //deference
+    T &operator *();
+    const T &operator*();
+
+
+    //getters.
+    /**
+     * return the iterator pointing to the
+     * beggining of the list.
+    */
+    T &begin();
+
+    /**
+     * return the iterator pointing to the
+     * end of the list.
+     */
+    T&end();
+
+    //!= operator.
+    bool operator!=(const T& data);
+
+//    void setCurrentNode();
+//    T &getData();
+//    void getNext();
+//    void getPrevious();
 }
 
 

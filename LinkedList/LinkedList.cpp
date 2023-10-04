@@ -7,6 +7,21 @@
 
 #include "LinkedList.h"
 
+
+/**
+ * Iterators
+ * */
+
+template<typename T>
+typename LinkedList<T>::iterator LinkedList<T>::begin(){
+    return this->iterator(head);
+}
+
+template<typename T>
+typename LinkedList<T>::iterator LinkedList<T>::end(){
+    return this->iterator(tail);
+}
+
 /**
  * LinkedList Private functions
  * */

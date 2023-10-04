@@ -6,6 +6,7 @@
 #define SPLIT_LINKEDLIST_H
 #include "Node.h"
 #include <iostream>
+#include "NodeIterator.h"
 //template function
 template<typename T>
 class LinkedList {
@@ -27,8 +28,19 @@ private:
 
     //rule pf thumb: if a function is just used inside the class, make it private!!!!
 public:
+    /**
+     * *constructors
+     * */
     LinkedList();
-     /*
+
+    /**
+     * iterator (this is new!!!)
+     * */
+    typedef  NodeIterator<T> iterator;
+    iterator begin(); //return NodeIterator(head);
+    iterator end(); //return NodeIterator(tail);
+
+     /**
      * Class Functions
      **/
     void push_front(const T& item); //add item to the front of the list
@@ -41,7 +53,7 @@ public:
 
     Node<T> *find(const T& ref);
 
-    /*
+    /**
      * Getters
      * */
     int size(); //returns the size of the list.
@@ -51,20 +63,23 @@ public:
     //const at beggining: the returned item cannot be modified.
     //const at end: no instruction inside the function that will modify any of the member variables.
 
-    /*
+    /**
      * Printers
      * */
     void printListFromHead() const;
     void printListFromTail() const;
 
 
-    /*operator overload*/
+    /**
+     * operator overload
+     * */
     template<typename U>
     friend std::ostream &operator<<(std::ostream &out, const LinkedList<U> &linkedList);
 
 
-    /**big 3 operators*/
-    //while(head!=nullptr) remove(head);
+    /**
+     * big 3 operators
+     * */
     ~LinkedList();
     LinkedList(const LinkedList<T> &linkedList);
     LinkedList<T> &operator=(const LinkedList<T> &linkedList);
