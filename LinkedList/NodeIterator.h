@@ -13,7 +13,6 @@ private:
  Node<T> *current;
  //hide the walker, and iterate through the list without exposing the node.
 public:
-//    NodeIterator();
     NodeIterator(Node<T>*current = nullptr); // one line code
     /**
     * postfix: ++int

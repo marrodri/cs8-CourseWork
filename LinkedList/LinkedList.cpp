@@ -32,6 +32,29 @@ typename LinkedList<T>::iterator LinkedList<T>::end() {
     return iterator(nullptr);
 }
 
+template<typename T>
+typename LinkedList<T>::reverse_iterator LinkedList<T>::rbegin() {
+    return reverse_iterator(tail);
+}
+
+template<typename T>
+typename LinkedList<T>::reverse_iterator LinkedList<T>::rend() {
+    return reverse_iterator(nullptr);
+}
+
+template<typename T>
+typename LinkedList<T>::reverse_iterator LinkedList<T>::rbegin() const {
+    return reverse_iterator(tail);
+}
+
+template<typename T>
+typename LinkedList<T>::reverse_iterator LinkedList<T>::rend() const {
+    return reverse_iterator(nullptr);
+}
+
+//reverse_iterator rbegin();  //
+//reverse_iterator rend();
+
 /**
  * LinkedList Private functions
  * */
@@ -259,14 +282,22 @@ void LinkedList<T>::printListFromHead() const {
 
 template<typename T>
 void LinkedList<T>::printListFromTail() const {
-    Node<T> *walker;
-    walker = tail;
+//    Node<T> *walker;
+//    walker = tail;
     std::cout << "Printing linked list from tail\n";
-    while(walker){
+//    while(walker){
+//        std::cout << "[";
+//        std::cout << walker->data;
+//        std::cout << "]->";
+//        walker = walker->previous;
+//    }
+//    std::cout << "nullptr\n";
+//    std::cout <<"==========================\n";
+    typename LinkedList<T>::reverse_iterator iter = this->rbegin();
+    for (; iter != this->rend(); ++iter) {
         std::cout << "[";
-        std::cout << walker->data;
+        std::cout << *iter;
         std::cout << "]->";
-        walker = walker->previous;
     }
     std::cout << "nullptr\n";
     std::cout <<"==========================\n";

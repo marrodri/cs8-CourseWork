@@ -7,6 +7,7 @@
 #include "Node.h"
 #include <iostream>
 #include "NodeIterator.h"
+#include "NodeReverseIterator.h"
 //template function
 template<typename T>
 class LinkedList {
@@ -40,15 +41,17 @@ public:
      * */
     typedef  NodeIterator<T> iterator;
 //    typedef  ConstNodeIterator<T> const_iterator;
-//    typedef  NodeReverseIterator<T> reverse_iterator;
+    typedef  NodeReverseIterator<T> reverse_iterator;
     iterator begin(); //return NodeIterator(head);
     iterator end(); //return NodeIterator(tail);
     iterator begin() const; //return NodeIterator(head);
     iterator end() const; //return NodeIterator(tail);
 //    const_iterator cbeing(); // return a const NodeIterator(head);
 //    const_iterator cend();  // return a const NodeIterator(tail);
-//      reverse_iterator rbegin();  //
-//      reverse_iterator rend();    //
+      reverse_iterator rbegin();  //
+      reverse_iterator rend();    //
+    reverse_iterator rbegin() const;  //
+    reverse_iterator rend() const;    //
 
      /**
      * Class Functions
