@@ -24,6 +24,8 @@ private:
     void push_back(Node<T> * item);
     void insertAfter(Node<T> * ref, const T& afterThis);
     void insertBefore(Node<T> * ref, const T& beforeThis);
+    void incrementListFromHead();
+
 //    void remove();
 
     //rule pf thumb: if a function is just used inside the class, make it private!!!!
@@ -37,8 +39,16 @@ public:
      * iterator (this is new!!!)
      * */
     typedef  NodeIterator<T> iterator;
+//    typedef  ConstNodeIterator<T> const_iterator;
+//    typedef  NodeReverseIterator<T> reverse_iterator;
     iterator begin(); //return NodeIterator(head);
     iterator end(); //return NodeIterator(tail);
+    iterator begin() const; //return NodeIterator(head);
+    iterator end() const; //return NodeIterator(tail);
+//    const_iterator cbeing(); // return a const NodeIterator(head);
+//    const_iterator cend();  // return a const NodeIterator(tail);
+//      reverse_iterator rbegin();  //
+//      reverse_iterator rend();    //
 
      /**
      * Class Functions
@@ -55,7 +65,7 @@ public:
 
     /**
      * Getters
-     * */
+     **/
     int size(); //returns the size of the list.
     const T& front() const; //returns the reference of the item in the front
     const T& back() const; //returns the reference of the item in the back
@@ -65,17 +75,15 @@ public:
 
     /**
      * Printers
-     * */
+     **/
     void printListFromHead() const;
     void printListFromTail() const;
 
-
     /**
      * operator overload
-     * */
-    template<typename U>
-    friend std::ostream &operator<<(std::ostream &out, const LinkedList<U> &linkedList);
-
+     **/
+    template<typename S>
+    friend std::ostream &operator<<(std::ostream &out, const LinkedList<S> &list);
 
     /**
      * big 3 operators
@@ -83,6 +91,7 @@ public:
     ~LinkedList();
     LinkedList(const LinkedList<T> &linkedList);
     LinkedList<T> &operator=(const LinkedList<T> &linkedList);
+
 };
 
 #include "LinkedList.cpp"

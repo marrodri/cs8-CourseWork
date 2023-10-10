@@ -13,55 +13,49 @@ private:
  Node<T> *current;
  //hide the walker, and iterate through the list without exposing the node.
 public:
-    NodeIterator();
+//    NodeIterator();
     NodeIterator(Node<T>*current = nullptr); // one line code
     /**
     * postfix: ++int
     * ++x -> increment x; return x;
     */
-    NodeIterator<T> &operator++(int); //two lines
+    NodeIterator<T> operator++(int); //two lines
 
     /**
      * prefix: int++
      * x++ -> copy x; then increment x;
      * then return copy.
      */
-    NodeIterator<T> operator++(); //one line or two line
+    NodeIterator<T> &operator++(); //one line or two line
 
     /*
      * decrementors*/
     NodeIterator<T> operator--(int); //
     NodeIterator<T> &operator--(); //
 
-
     //deference
     T &operator *();
-    const T &operator*();
+
+    /**TODOs*/
+    NodeIterator<T> operator+=(int add);
+    NodeIterator<T> operator-=(int subtract);
+    NodeIterator<T> operator+(int add);
+
+    const T &operator*() const;
 
 
-    //getters.
-    /**
-     * return the iterator pointing to the
-     * beggining of the list.
-    */
-    T &begin();
+    /**DONE*/
+    template<typename U>
+    friend bool operator!=(const NodeIterator<U> &rhs, const NodeIterator<U> &lhs);
 
-    /**
-     * return the iterator pointing to the
-     * end of the list.
-     */
-    T&end();
+    template<typename U>
+    friend bool operator==(const NodeIterator<U> &rhs, const  NodeIterator<U> &lhs);
 
     //!= operator.
     bool operator!=(const T& data);
+};
 
-//    void setCurrentNode();
-//    T &getData();
-//    void getNext();
-//    void getPrevious();
-}
-
-
+#include "NodeIterator.cpp"
 
 
 #endif //SPLIT_NODEITERATOR_H

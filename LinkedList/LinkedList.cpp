@@ -13,13 +13,23 @@
  * */
 
 template<typename T>
-typename LinkedList<T>::iterator LinkedList<T>::begin(){
-    return this->iterator(head);
+typename LinkedList<T>::iterator LinkedList<T>::begin() const{
+    return iterator(head);
 }
 
 template<typename T>
-typename LinkedList<T>::iterator LinkedList<T>::end(){
-    return this->iterator(tail);
+typename LinkedList<T>::iterator LinkedList<T>::end() const{
+    return iterator(nullptr);
+}
+
+template<typename T>
+typename LinkedList<T>::iterator LinkedList<T>::begin() {
+    return iterator(head);
+}
+
+template<typename T>
+typename LinkedList<T>::iterator LinkedList<T>::end() {
+    return iterator(nullptr);
 }
 
 /**
@@ -236,14 +246,12 @@ bool LinkedList<T>::empty(){
  **/
 template<typename T>
 void LinkedList<T>::printListFromHead() const {
-    Node<T> *walker;
-    walker = head;
     std::cout << "Printing linked list from head\n";
-    while(walker){
+    typename LinkedList<T>::iterator iter = this->begin();
+    for (; iter != this->end(); ++iter) {
         std::cout << "[";
-        std::cout << walker->data;
+        std::cout << *iter;
         std::cout << "]->";
-        walker = walker->next;
     }
     std::cout << "nullptr\n";
     std::cout <<"==========================\n";
@@ -264,16 +272,16 @@ void LinkedList<T>::printListFromTail() const {
     std::cout <<"==========================\n";
 }
 
-template<typename U> //Done.
-std::ostream &operator<<(std::ostream &out, const LinkedList<U> &linkedList){
-    Node<U> *walker = linkedList.head;
-    while(walker){
-        out << "[";
-        out << walker->data;
-        out << "]->";
-        walker = walker->next;
+
+//template T applies to the scope below it, not above it.
+template<typename T>
+std::ostream &operator<<(std::ostream &out, const LinkedList<T> &list){
+
+    typename LinkedList<T>::iterator iter = list.begin();
+    for (; iter != list.end(); ++iter) {
+        out << *iter << " ";
     }
-    out << "nullptr\n";
+    out << "\n";
     return out;
 }
 

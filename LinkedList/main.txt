@@ -81,9 +81,9 @@ int main(){
 
 
     /**copy constructors big 3*/
-     LinkedList<int> copiedList = linkedList;
+    LinkedList<int> copiedList = linkedList;
 
-    std::cout << "Copied List\n";
+    std::cout << "Copied Lists\n";
     int newData = 500;
     copiedList.push_back(newData);
     copiedList.printListFromHead();
