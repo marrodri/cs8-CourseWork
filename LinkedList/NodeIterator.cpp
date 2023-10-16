@@ -63,8 +63,7 @@ bool NodeIterator<T>::operator!=(const T &data) {
 //add list
 template<typename T>
 NodeIterator<T> NodeIterator<T>::operator+=(int add){
-
-    for(int i =0; i < add;i++){
+    for(int i =0; i < add; i++){
         current++;
     }
     return current;
@@ -72,7 +71,7 @@ NodeIterator<T> NodeIterator<T>::operator+=(int add){
 
 template<typename T>
 NodeIterator<T> NodeIterator<T>::operator-=(int subtract){
-    for(int i =0; i < subtract;i++){
+    for(int i =0; i < subtract; i++){
         current--;
     }
     return current;
@@ -80,7 +79,7 @@ NodeIterator<T> NodeIterator<T>::operator-=(int subtract){
 
 template<typename T>
 NodeIterator<T> NodeIterator<T>::operator+(int add){
-    for(int i =0; i < add;i++){
+    for(int i =0; i < add; i++){
         current++;
     }
     return current;
@@ -94,7 +93,7 @@ bool operator!=(const NodeIterator<U> &rhs, const  NodeIterator<U> &lhs){
 
 template<typename U>
 bool operator==(const NodeIterator<U> &rhs, const NodeIterator<U> &lhs){
-    return rhs.current == lhs.current;
+    return (rhs.current == lhs.current);
 }
 
 #endif

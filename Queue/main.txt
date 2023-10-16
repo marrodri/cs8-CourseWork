@@ -1,0 +1,59 @@
+#include "Queue/Queue.h"
+
+int main() {
+    //continue later
+//    ShuntingYard shuntingYard;
+//
+//    std::vector<std::string> infixVector;
+    Queue<int> smallQueue;
+
+    const int a=1;
+    const int b=2;
+    const int c=3;
+    const int d=4;
+    const int e=5;
+
+    smallQueue.enqueue(a);
+    smallQueue.enqueue(b);
+    smallQueue.enqueue(c);
+    smallQueue.enqueue(d);
+    smallQueue.enqueue(e);
+
+    std::cout << "Calling small queue\n";
+    std::cout << smallQueue << std::endl;
+
+
+    std::cout << "dequeue smallQueue\n";
+    smallQueue.dequeue();
+    std::cout << "dequeing smallQueue\n";
+    smallQueue.dequeue();
+
+    std::cout << "Calling small queue\n";
+    std::cout << smallQueue << std::endl;
+
+
+    Queue<int> copyQueue = smallQueue;
+    const int f=10;
+    const int ge=40;
+    copyQueue.enqueue(f);
+    copyQueue.enqueue(ge);
+    std::cout << "Calling copy Queue\n";
+    std::cout << copyQueue << std::endl;
+
+
+
+    std::cout << "Calling small queue\n";
+    std::cout << smallQueue << std::endl;
+
+
+    std::cout << "queue smallQueue\n";
+    std::cout << "queue smallQueue\n";
+    const int tr=432;
+    const int red=32;
+    smallQueue.enqueue(tr);
+    smallQueue.enqueue(red);
+
+
+    std::cout << "Calling small queue\n";
+    std::cout << smallQueue << std::endl;
+}

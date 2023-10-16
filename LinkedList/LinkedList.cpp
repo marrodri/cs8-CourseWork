@@ -107,8 +107,7 @@ void LinkedList<T>::push_front(Node<T> *item) {
 template<typename T>
 void LinkedList<T>::push_back(Node<T> *item) {
     //set tail->next to item.
-    if(!head){
-
+    if (!head) {
         head=item;
         tail=item;
         return ;

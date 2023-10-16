@@ -7,9 +7,9 @@
 #include "NodeReverseIterator.h"
 
 template<typename T>
-NodeReverseIterator<T>::NodeReverseIterator(Node<T>*current):current(current){
+NodeReverseIterator<T>::NodeReverseIterator(const Node<T> *current):current(current){
     this->current = current;
-} // one line code
+} // one line code.
 
 /**
 * postfix: ++int

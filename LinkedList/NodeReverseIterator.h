@@ -5,13 +5,15 @@
 #ifndef SPLIT_NODEREVERSEITERATOR_H
 #define SPLIT_NODEREVERSEITERATOR_H
 #include "Node.h"
+#include <iterator>
+
 template<typename T>
-class NodeReverseIterator {
+class NodeReverseIterator : public std::iterator<std::bidirectional_iterator_tag, T>  {
 private:
     Node<T> *current;
 public:
-    //    NodeIterator();
-    NodeReverseIterator(Node<T>*current = nullptr); // one line code
+    NodeReverseIterator();
+    NodeReverseIterator(const Node<T>*current = nullptr); // one line code
 
     /**
     * postfix: ++int
