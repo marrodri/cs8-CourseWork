@@ -14,7 +14,7 @@ private:
     std::stack<double> stackDouble;
 
 public:
-    int calculatePostFix(std::string &postFixOp);
+    double calculatePostFix(std::string &postFixOp);
     double calculatePostFixDouble(std::string postFixOp);
 
     double doOperation(double left, double right, char op);

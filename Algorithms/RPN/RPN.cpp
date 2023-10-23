@@ -29,34 +29,48 @@ std::vector<std::string> stringSplit(std::string &str, char delimeter){
         splitString.push_back(substr);
         i += length + 1;
     }
+    if(str[i]){
+        substr = str.substr(i, 1);
+        splitString.push_back(substr);
+    }
+
+//    std::cout <<"final splittled string: ";
+//    for(int j =0; j < splitString.size();j++){
+//        std::cout << splitString[j] <<", ";
+//    }
+//    std::cout << "\n"<<std::endl;
     return splitString;
 }
 double RPN::doOperation(double left, double right, char op){
     double result = 0;
-    switch(op){
+    std::cout << "running op: ";
+    switch(op) {
         case '*':
             result = left * right;
+            std::cout << left<<"*"<<right<<"=" << result<<"\n";
             break;
         case '/':
             result = left / right;
+            std::cout << left<<"/"<<right<<"=" << result<<"\n";
             break;
         case '-':
             result = left - right;
+            std::cout << left<<"-"<<right <<"=" << result<<"\n";
             break;
         default:
             result = left + right;
+            std::cout << left<<"+"<<right<<"=" << result<<"\n";
             break;
     }
     return result;
 }
 
-int RPN::calculatePostFix(std::string &postFixOp){
+double RPN::calculatePostFix(std::string &postFixOp){
     std::cout << "calculatePostFix called\n";
-    double number=0;
-    double leftNum=0;
-    double rightNum=0;
+    double number=0.0;
+    double leftNum=0.0;
+    double rightNum=0.0;
     std::vector<std::string> splitPostFix = stringSplit(postFixOp, ' ');
-    std::cout << "printing splitPostFix\n";
     for (std::string &op: splitPostFix) {
         if(isNumber(op)){
             number = std::stod(op);
@@ -71,6 +85,7 @@ int RPN::calculatePostFix(std::string &postFixOp){
             stackInt.push(number);
         }
     }
+
     return number;
 }
 
