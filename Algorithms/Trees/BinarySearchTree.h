@@ -18,8 +18,8 @@ private:
     // -check more about the depth of the trees.
 
     //breath order
-    //dfs
-    //bfs
+    //dfs.
+    //bfs.
 
     //balance tree function().
 
@@ -27,35 +27,40 @@ private:
     // - full tree.
     // - complete tree.
     //NOTE: these are completely different terms.!!
-    Node<T> * addNodeToTree(Node<T> *node,const  T &val);
+
+    /**
+     * private helper methods
+     **/
     Node<T> *createNode(const T &item);
+
+    /**
+     * private recursive BST functions
+     * */
+    Node<T> *addNodeToTree(Node<T> *node,const  T &val);
+    bool    search(Node<T> *curr, const T &item);
+    Node<T> *remove(Node<T> *curr, T data);
 
 
     /**
-     * private traversal functions
+     * private traversal recursive functions
      **/
     void    postorderIterator(void(*f)(T& data), Node<T> *curr);
     void    preorderIterator(void(*f)(T& data), Node<T> *curr);
     void    inorderIterator(void(*f)(T& data), Node<T> *curr); //DONE
-    Node<T> *remove(Node<T> *curr, T data);
+    void    breathFirstOrderTraversal(void(*f)(T& data), Node<T> *curr);
+
 public:
     BinarySearchTree();
 
     /**
-     * base tree function.
+     * public BST functions.
      **/
     void addValueToTree(const T &item);
-    int getSize(); //TODO
-    int getDepth(); //TODO
+    int getSize(); //TODO. Last
+    int getDepth(); //TODO. Last
+    void remove(T data);
+    bool search(const T &item); //TODO IMPORTANT
 
-    /**
-     * queue algorithms
-     **/
-    /**
-    * bst header from dave smith class
-    **/
-    void breathFirstOrderTraversal();
-    void depthFirstOrderTraversal();
 
     /**
      * tree iterators.
@@ -63,18 +68,14 @@ public:
     void inorderIterator(void(*f)(T& data));
     void postorderIterator(void(*f)(T& data));
     void preorderIterator(void(*f)(T& data));
+    void breathFirstOrderTraversal(void(*f)(T& data)); //TODO IMPORTANT
 
     /**
-     * remove node.
-     **/
-    void remove(T data);
-
-    /*if is leaf, delete
-     * --otherwise, node has 1 child; swap with child.
-     *    then call remove(child);
-     * --else node has z children;swap with
-     *    next successor. call remove under successor.
-     * **/
+     * big 3 TODO IMPORTANT
+     * */
+//     copy constructor (use preorder traversal)
+//      destructor (use postorder traversal)
+//      assignment operator
 };
 
 //   --kuaijie = "see you soon";

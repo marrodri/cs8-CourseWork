@@ -22,16 +22,28 @@ BinarySearchTree<T>::BinarySearchTree() {
      **/
 }
 
-//template<typename T>
-//BinarySearchTree<T>::BinarySearchTree(T &rootValue) {
-//
-//}
+/**
+ * private helpers
+ * */
+template<typename T>
+Node<T> *BinarySearchTree<T>::createNode(const T &item) {
+    Node<T> *newNode = new Node<T>;
+    newNode->data = item;
+    return newNode;
+}
 
 /**
- * private methods
- **/
+ * binary search tree functions
+ * */
 
-//break
+//public method
+template<typename T>
+void BinarySearchTree<T>::addValueToTree(const T &item) {
+    root = addNodeToTree(root,item);
+    size++;
+}
+
+//private method
 template<typename T>
 Node<T> *BinarySearchTree<T>::addNodeToTree(Node<T> *node,const T &val) {
     if (!node) {
@@ -51,21 +63,96 @@ Node<T> *BinarySearchTree<T>::addNodeToTree(Node<T> *node,const T &val) {
 }
 
 
+//public method
 template<typename T>
-Node<T> *BinarySearchTree<T>::createNode(const T &item) {
-    Node<T> *newNode = new Node<T>;
-    newNode->data = item;
-    return newNode;
+void BinarySearchTree<T>::remove(T data) {
+//    root=
+    root=remove(root, data);
+    size--;
 }
 
+//private method
 template<typename T>
-void BinarySearchTree<T>::addValueToTree(const T &item) {
-        root = addNodeToTree(root,item);
-        size++;
+Node<T> *BinarySearchTree<T>::remove(Node<T> *curr, T data){
+    T tmpVal;
+    if(!curr){
+        return nullptr;
+    }
+    if (curr->data == data) {
+        if (!curr->previous && !curr->next) {
+            delete(curr);
+            curr = nullptr;
+            return curr;
+        }else{
+            //swap
+            if(curr->next) {
+                //swap with left children;
+                //tmpVal is child.
+                tmpVal = curr->next->data;
+                //now child has the value to delete.
+                curr->next->data = curr->data;
+                //now curr has
+                curr->data = tmpVal;
+                curr->next = remove(curr->next, data);
+            }
+            else if(curr->previous) {
+                //swap with left children;
+                //swap with left children;
+                //tmpVal is child.
+                tmpVal = curr->previous->data;
+                //now child has the value to delete.
+                curr->previous->data = curr->data;
+                //now curr has
+                curr->data = tmpVal;
+                curr->previous = remove(curr->previous, data);
+            }
+        }
+    }
+    else{
+        if(curr->data < data){
+
+            curr->next = remove(curr->next, data);
+        }
+        else {
+            curr->previous = remove(curr->previous, data);
+        }
+    }
+    return curr;
 }
+
+//TODO public method
+template<typename T>
+bool BinarySearchTree<T>::search(const T &item) {
+    return search(root, item);
+}
+
+//TODO: private method
+template<typename T>
+bool BinarySearchTree<T>::search(Node<T> *curr, const T &item) {
+    bool isFounded = false;
+    if(curr->data == item){
+        return true;
+    }
+    if (!curr->previous && !curr->next) {
+        return false;
+    }
+    if(curr) {
+        {
+//            isFounded = search(curr, item);
+            if (curr->previous && !isFounded) {
+                isFounded = search(curr->previous, item);
+            }
+            if (curr->next && !isFounded) {
+                isFounded = search(curr->next, item);
+            }
+        }
+    }
+    return isFounded;
+}
+
 
 /**
- * Public traversal nodes
+ * bst traversal functions
 **/
 
 template<typename T>
@@ -92,12 +179,12 @@ void BinarySearchTree<T>::inorderIterator(void(*f)(T& data)) {
  * */
 
 template<typename T>
-void BinarySearchTree<T>::breathFirstOrderTraversal() {
+void BinarySearchTree<T>::breathFirstOrderTraversal(void(*f)(T& data)) {
+    breathFirstOrderTraversal(f, root);
 }
 
-template<typename T>
-void BinarySearchTree<T>::depthFirstOrderTraversal() {
-}
+
+
 
 /**
  * private traversal functions
@@ -161,60 +248,20 @@ void BinarySearchTree<T>::inorderIterator(void(*f)(T& data), Node<T> *curr) {
     }
 }
 
-
 template<typename T>
-void BinarySearchTree<T>::remove(T data) {
-//    root=
-    root=remove(root, data);
-    size--;
+void BinarySearchTree<T>::breathFirstOrderTraversal(void (*f)(T &), Node<T> *curr) {
+
 }
 
-template<typename T>
-Node<T> *BinarySearchTree<T>::remove(Node<T> *curr, T data){
-    T tmpVal;
-    if(!curr){
-        return nullptr;
-    }
-    if (curr->data == data) {
-        if (!curr->previous && !curr->next) {
-            delete(curr);
-            curr = nullptr;
-            return curr;
-        }else{
-            //swap
-            if(curr->next) {
-                //swap with left children;
-                //tmpVal is child.
-                tmpVal = curr->next->data;
-                //now child has the value to delete.
-                curr->next->data = curr->data;
-                //now curr has
-                curr->data = tmpVal;
-                curr->next = remove(curr->next, data);
-            }
-            else if(curr->previous) {
-                //swap with left children;
-                //swap with left children;
-                //tmpVal is child.
-                tmpVal = curr->previous->data;
-                //now child has the value to delete.
-                curr->previous->data = curr->data;
-                //now curr has
-                curr->data = tmpVal;
-                curr->previous = remove(curr->previous, data);
-            }
-        }
-    }
-    else{
-        if(curr->data < data){
 
-            curr->next = remove(curr->next, data);
-        }
-        else {
-            curr->previous = remove(curr->previous, data);
-        }
-    }
-    return curr;
-}
+
+/*if is leaf, delete
+     * --otherwise, node has 1 child; swap with child.
+     *    then call remove(child);
+     * --else node has z children;swap with
+     *    next successor. call remove under successor.
+     * **/
+
+
 
 #endif
