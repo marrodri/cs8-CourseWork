@@ -183,7 +183,30 @@ void BinarySearchTree<T>::breathFirstOrderTraversal(void(*f)(T& data)) {
     breathFirstOrderTraversal(f, root);
 }
 
-
+template<typename T>
+void BinarySearchTree<T>::breathFirstOrderTraversal(void (*f)(T &), Node<T> *root) {
+    std::queue<Node<T>*> queue;
+    Node<T> *current;
+    if (!root){
+        return ;
+    }
+    if (!root->next && !root->previous) {
+        f(root->data);
+        return ;
+    }
+    queue.push(root);
+    while(!queue.empty()){
+        current = queue.front();
+        queue.pop();
+        f(current->data);
+        if(current->previous){
+            queue.push(current->previous);
+        }
+        if(current->next){
+            queue.push(current->next);
+        }
+    }
+}
 
 
 /**
@@ -248,20 +271,15 @@ void BinarySearchTree<T>::inorderIterator(void(*f)(T& data), Node<T> *curr) {
     }
 }
 
-template<typename T>
-void BinarySearchTree<T>::breathFirstOrderTraversal(void (*f)(T &), Node<T> *curr) {
-
-}
 
 
 
+//logic for deleting code.
 /*if is leaf, delete
      * --otherwise, node has 1 child; swap with child.
      *    then call remove(child);
      * --else node has z children;swap with
      *    next successor. call remove under successor.
      * **/
-
-
 
 #endif

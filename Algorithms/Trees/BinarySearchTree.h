@@ -7,6 +7,7 @@
 
 #include "../../LinkedList/Node.h"
 #include <iostream>
+#include <queue>
 template<typename T>
 class BinarySearchTree {
 private:
@@ -48,7 +49,6 @@ private:
     void    preorderIterator(void(*f)(T& data), Node<T> *curr);
     void    inorderIterator(void(*f)(T& data), Node<T> *curr); //DONE
     void    breathFirstOrderTraversal(void(*f)(T& data), Node<T> *curr);
-
 public:
     BinarySearchTree();
 
@@ -59,8 +59,7 @@ public:
     int getSize(); //TODO. Last
     int getDepth(); //TODO. Last
     void remove(T data);
-    bool search(const T &item); //TODO IMPORTANT
-
+    bool search(const T &item);
 
     /**
      * tree iterators.
