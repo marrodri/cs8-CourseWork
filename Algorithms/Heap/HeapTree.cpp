@@ -34,6 +34,7 @@ void HeapTree<T>::push(const T&item) {
     //check if the bottom, which is the child index, is lower than
     //the parent, that must go up, because its smaller than parent.
     reheapifyUp(data.size() -1);
+    //from bottom, bubble up.
 }
 
 
@@ -42,6 +43,8 @@ void HeapTree<T>::pop() {
     //move the back to the front.
     data[0] = data[data.size()-1];
     data.pop_back();
+    reheapifyDown(0);
+    //from top, bubble down.
 }
 
 
@@ -70,7 +73,19 @@ void HeapTree<T>::reheapifyUp(int childIndex) {
 template<typename T>
 void HeapTree<T>::reheapifyDown(int parentIndex) {
     //TODO: build the reheapifyDown funct that is recursive.
-
+    int greaterChildIndex  = getGreaterChildIndex(parentIndex);
+    int leftChildIndex = getLeftChildIndex(parentIndex);
+    int rightChildIndex = getRightChildIndex(parentIndex);
+    T tmpData;
+    if (data[parentIndex] >= data[rightChildIndex] && data[parentIndex] >= data[leftChildIndex]){
+        return ;
+    }
+    else{
+        tmpData = data[parentIndex];
+        data[parentIndex] = data[greaterChildIndex];
+        data[greaterChildIndex] = tmpData;
+        reheapifyDown(greaterChildIndex);
+    }
 }
 
 /**
