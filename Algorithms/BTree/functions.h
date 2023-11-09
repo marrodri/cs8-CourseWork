@@ -26,7 +26,7 @@ int *find(BTree<int> *tree, int value);
 void insertValue(BTree<int> *tree, int value);
 
 //just inserts value, that's it, it's a recursive function
-void looseInsertValue(BTree<int> *tree, int value);
+BTree<int> *looseInsertValue(BTree<int> *tree, int value);
 
 
 

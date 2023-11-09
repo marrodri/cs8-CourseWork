@@ -66,31 +66,11 @@ int *find(BTree<int> *tree, int value){
  **/
 void insertValue(BTree<int> *tree, int value) {
     //looseInsertRecursively to add the node.
-    looseInsertValue(tree, value);
+    tree = looseInsertValue(tree, value);
     //then fix its excess to balance the tree.
     fixExcess(tree);
 
 }
-
-void looseInsertValue(BTree<int> *tree, int value) {
-    int index = firstGet(*tree, value);
-    bool found = (tree->data[index] == found);
-    if(!found){
-        // if node is leaf
-        if (tree->child_count == 0) {
-            // insert the item. if the data is full, create a child, in the
-            //right index, and add it in the new child.
-            //
-            if (tree->data_count <= tree->size){
-                //
-            }
-
-        }else{
-            looseInsertValue(tree->subset[index],value);
-        }
-    }
-}
-
 
 /**
  * fixExcess (currently is a stub funct);
@@ -98,6 +78,44 @@ void looseInsertValue(BTree<int> *tree, int value) {
 void fixExcess(BTree<int> *tree){
     std::cout << "fixing excess logic\n";
     return ;
+}
+
+
+BTree<int> *looseInsertValue(BTree<int> *tree, int value) {
+    int index = firstGet(*tree, value);
+    bool found = (tree->data[index] == value);
+    if (!found) {
+        // if node is leaf
+        if (tree->child_count == 0) {
+            // insert the item. if the data is full, create a child, in the
+            //right index, and add it in the new child.
+            //
+            if (tree->data_count < tree->size){
+
+
+                //if the desired value is lower than the current value.
+                //shift the current value to left, and add the desired
+                //value to the current index.
+                if( tree->data[index] > value){
+                    tree->data[index+1] = tree->data[index];
+                    tree->data[index] = value;
+                }
+                //another edge case added.
+                else if(index == tree->size){
+                    tree->data[tree->data_count] = value;
+                }
+                //otherwise just add it as how it is.
+                else{
+                    tree->data[index] = value;
+                }
+                tree->data_count++;
+            }
+            return tree;
+        }else{
+            return looseInsertValue(tree->subset[index],value);
+        }
+    }
+    return tree;
 }
 
 /**
