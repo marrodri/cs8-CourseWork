@@ -16,9 +16,9 @@ private:
     std::vector<std::string> stack;
     std::queue<std::string> queue;
 
-    void pushOpToStack(std::string);
+
     std::string popOpFromStack();
-    void pushOpToQueue();
+
     bool isHigherPrecedence(char op1, char op2);
 
     bool isNumber(std::string value);

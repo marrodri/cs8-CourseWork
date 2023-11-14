@@ -1,0 +1,77 @@
+
+#include <iostream>
+#include "Algorithms/Trees/BinarySearchTree.h"
+
+void output(int &data){
+    std::cout << data << " ";
+}
+
+void addValue1(int &data){
+    data = data + 1;
+}
+
+int main() {
+    const int a = 12;
+    const int b = 32;
+    const int c = 54;
+    const int d = 28;
+    const int e = 79;
+    const int f = 74;
+    const int g = 50;
+    const int h = 15;
+    const int i = 6;
+    const int j = 8;
+
+    BinarySearchTree<int> bst;
+    bst.addValueToTree(a);
+    bst.addValueToTree(b);
+    bst.addValueToTree(c);
+    bst.addValueToTree(d);
+    bst.addValueToTree(e);
+    bst.addValueToTree(f);
+    bst.addValueToTree(g);
+    bst.addValueToTree(h);
+    bst.addValueToTree(i);
+    bst.addValueToTree(j);
+
+    bst.iterateBinaryTree(output, INORDER);
+    std::cout << "\n!!!calling breath first traversal order: ";
+    bst.iterateBinaryTree(output, BREADTHORDER);
+    std::cout << " ...";
+//    bst.inorderIterator(output);
+//    bst.inorderIterator(addValue1);
+
+    std::cout << "removing: 797\n";
+    bst.remove(797);
+    bst.iterateBinaryTree(output, INORDER);
+
+
+
+//    std::cout << "removing: 233\n";
+//    std::cout << "removing: 298\n";
+//    std::cout << "removing: 908\n";
+
+    bst.remove(233);
+    bst.remove(298);
+    bst.remove(908);
+
+    bst.iterateBinaryTree(output,INORDER);
+
+    //
+    //
+    //
+    //
+    std::cout <<"236 exist in tree: "<< bst.search(c)<< "\n";
+    std::cout <<"236 exist in tree: "<< bst.search(c)<< "\n";
+    std::cout <<"236 exist in tree: "<< bst.search(c)<< "\n";
+    std::cout <<"908 exist in tree: "<< bst.search(j)<< "\n";
+    std::cout <<"908 exist in tree: "<< bst.search(j)<< "\n";
+    std::cout <<"325 exist in tree: "<< bst.search(a)<< "\n";
+
+
+
+    BinarySearchTree<int> copyBinTree = bst;
+
+    std::cout << "tree copied to copyBinTree: printing copyBinTree:\n";
+    copyBinTree.iterateBinaryTree(output,BREADTHORDER);
+}

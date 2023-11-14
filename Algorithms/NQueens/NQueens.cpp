@@ -27,10 +27,6 @@ bool NQueens::isPlaceValid(int k, int i) {
     return true;
 }
 
-void NQueens::writeBoard() {
-    printBoard();
-}
-
 //k = current Queen
 void NQueens::solveNQueens(int k) {
     // use Backtrack, this procedure prints all
@@ -42,7 +38,7 @@ void NQueens::solveNQueens(int k) {
             globalArray[k] = i;
             // when k reaches the last row. print
             if (k == numOfQueens-1) {
-                writeBoard();
+                printBoard();
                 //return ;
             }
             else {
@@ -70,7 +66,6 @@ void NQueens::printBoard() {
     std::cout << " ]\n";
     std::cout << "========printing board===========\n";
     for (int i =0; i < globalArray.size();i++) {
-        //row
         std::cout << "[";
         for (int j =0; j < globalArray.size();j++) {
             if(globalArray[i] == j)

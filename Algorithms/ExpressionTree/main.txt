@@ -1,0 +1,7 @@
+#include "Algorithms/ExpressionTree/ExpressionTree.h"
+
+int main(){
+    std::string postFixExpr = "95*7/58/9*+1+92*-";
+    double finalResult = ExpressionTree::evaluate(postFixExpr);
+    std::cout << "finalResult is: " << finalResult <<"\n";
+}

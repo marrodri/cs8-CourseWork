@@ -6,8 +6,8 @@
 #define SPLIT_LINKEDLIST_H
 #include "Node.h"
 #include <iostream>
-//#include "NodeIterator.h"
-//#include "NodeReverseIterator.h"
+#include "NodeIterator.h"
+#include "NodeReverseIterator.h"
 //template function
 template<typename T>
 class LinkedList {

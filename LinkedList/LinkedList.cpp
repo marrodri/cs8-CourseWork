@@ -78,7 +78,7 @@ Node<T> *LinkedList<T>::createNode(const T &item) {
 //done
 template<typename T>
 void LinkedList<T>::addFirstNode(const T &item) {
-    Node<T> *newNode =createNode(item);
+    Node<T> *newNode = createNode(item);
     this->head = newNode;
     this->tail = newNode;
     _size++;
@@ -127,7 +127,7 @@ void LinkedList<T>::insertAfter(Node<T> *ref, const T &afterThis) {
     Node<T> *walker = head;
     Node<T> *tmpNode;
     walker = find(afterThis);
-    if(!walker){
+    if(!walker) {
         std::cout << "no data has been founded in the linked list.\n";
         return ;
     }
@@ -315,6 +315,7 @@ std::ostream &operator<<(std::ostream &out, const LinkedList<T> &list){
     return out;
 }
 
+
 /**
  * Big 3 functions
  * */
@@ -345,5 +346,8 @@ LinkedList<T> &LinkedList<T>::operator=(const LinkedList<T> &linkedList) {
     }
     return *this;
 }
+
+
+
 
 #endif

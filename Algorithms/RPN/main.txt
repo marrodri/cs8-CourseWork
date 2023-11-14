@@ -1,0 +1,32 @@
+#include "Algorithms/RPN/RPN.h"
+#include "Algorithms/ShuntingYard/ShuntingYard.h"
+
+
+int main() {
+    ShuntingYard shuntingYard;
+    RPN rpn;
+    std::vector<std::string> infixVector;
+    std::string op1 = "345+323/32+(32-43)*(232-21)";
+
+    std::string postFix = shuntingYard.convertInfixToPostfix(op1);
+    std::cout << "postFix:" << postFix <<"\n";
+    std::cout<<"rpn op1 result: " <<rpn.calculatePostFix(postFix)<<std::endl;
+    std::cout << "reg op1 result:" << 345+323/32+(32-43)*(232-21) <<std::endl;
+
+    std::string op2 = "(3+9/2+(9-5)*(2-1))";
+    std::string postFixOp2 = shuntingYard.convertInfixToPostfix(op2);
+    std::cout << "postFix:" << postFixOp2 <<"\n";
+    std::cout<< "rpn op2 result: " <<rpn.calculatePostFix(postFixOp2)<<std::endl;
+    std::cout<< "reg op2 result: " << 3+9/2+(9-5)*(2-1) << std::endl;
+}
+
+
+//infix to postfix ops!!!.
+/**
+ *
+ * * -- 345+323(32*43)/232 = this should be an error
+ * *
+ * * -- (345+323(32*43)/232)) : bug, on the last parenthesis
+ * * -- 345+323*(32*43)/232 = 345 323 32 43 * * 232 / + (done)
+ * * -- 345+323/32+(32-43)*(232-21) = 345 323 32 / + 32 43 - 232 21 - * + (done)
+ */

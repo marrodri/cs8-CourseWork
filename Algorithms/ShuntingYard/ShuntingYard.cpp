@@ -5,20 +5,12 @@
 #include "ShuntingYard.h"
 ShuntingYard::ShuntingYard(){}
 
-void ShuntingYard::pushOpToStack(std::string Op){
-    //
-}
-
 std::string ShuntingYard::popOpFromStack(){
     //NOTE: stack.top() is the same as stack.back when its a vector object.
     std::string op = stack.back();
     stack.pop_back();
     return op;
 }
-
-//void ShuntingYard::pushValueToQueue(std::string value){
-//    //
-//}
 
 bool ShuntingYard::isHigherPrecedence(char op1, char op2){
 
@@ -29,9 +21,6 @@ bool ShuntingYard::isHigherPrecedence(char op1, char op2){
     //compare both ops. if op1 has a higher precendece than op2.
     //return true. otherwise return false.
     // PEMDAS
-//    if(op2=='('){
-//        return true;
-//    }
     if(op1 == op2){
         return true;
     }
@@ -101,10 +90,6 @@ std::string ShuntingYard::convertInfixToPostfix(const std::string &infixStr){
     //split the string to a vector of values
     std::vector<std::string> infixVector = operatorSplitter(infixStr);
     std::string finalQueue;
-    std::cout <<"splitted infix: ";
-    for(std::string &infixVal:infixVector){
-        std::cout << infixVal <<" ";
-    }
     std::cout << "\n";
 
     //Checkpoint view here.
@@ -156,10 +141,9 @@ std::string ShuntingYard::convertInfixToPostfix(const std::string &infixStr){
             return std::string("Error infix no passed correctly.");
         }
     }
-    //otherwise return the new created queue.
 
 
-
+//concatenate the queue to a string and return the new string.
     while(!queue.empty()){
         std::string new_s = queue.front();
         finalQueue += std::string(new_s);
@@ -169,7 +153,7 @@ std::string ShuntingYard::convertInfixToPostfix(const std::string &infixStr){
         }
     }
     return finalQueue;
-    //concatenate the queue to a string and return the new string.
+
 }
 
 

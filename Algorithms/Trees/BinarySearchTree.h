@@ -8,21 +8,14 @@
 #include "../../LinkedList/Node.h"
 #include <iostream>
 #include <queue>
+
+enum TreeTraversalEnum{ PREORDER, POSTORDER, INORDER, BREADTHORDER };
+
 template<typename T>
 class BinarySearchTree {
 private:
     Node<T> *root;
     int size;
-    // -node->prev: left, node->next: right.
-    // -each node has its own depth.
-    // -the three has its max depth.
-    // -check more about the depth of the trees.
-
-    //breath order
-    //dfs.
-    //bfs.
-
-    //balance tree function().
 
     //terms to search:
     // - full tree.
@@ -41,7 +34,6 @@ private:
     bool    search(Node<T> *curr, const T &item);
     Node<T> *remove(Node<T> *curr, T data);
 
-
     /**
      * private traversal recursive functions
      **/
@@ -49,6 +41,9 @@ private:
     void    preorderIterator(void(*f)(T& data), Node<T> *curr);
     void    inorderIterator(void(*f)(T& data), Node<T> *curr); //DONE
     void    breathFirstOrderTraversal(void(*f)(T& data), Node<T> *curr);
+    Node<T> *preorderTreeCopy(Node<T> *node);
+    void postorderTreeDestructor(Node<T> *node);
+
 public:
     BinarySearchTree();
 
@@ -57,24 +52,28 @@ public:
      **/
     void addValueToTree(const T &item);
     int getSize(); //TODO. Last
-    int getDepth(); //TODO. Last
     void remove(T data);
     bool search(const T &item);
 
     /**
      * tree iterators.
      **/
-    void inorderIterator(void(*f)(T& data));
-    void postorderIterator(void(*f)(T& data));
-    void preorderIterator(void(*f)(T& data));
-    void breathFirstOrderTraversal(void(*f)(T& data)); //TODO IMPORTANT
+    void iterateBinaryTree(void(*f)(T& data), TreeTraversalEnum treeTraversal);
 
+    /**
+     * operator overload
+     * */
+
+    BinarySearchTree<T> &operator+=(const T &data);
     /**
      * big 3 TODO IMPORTANT
      * */
-//     copy constructor (use preorder traversal)
-//      destructor (use postorder traversal)
-//      assignment operator
+     //copy constructor (use preorder traversal)
+     BinarySearchTree(const BinarySearchTree<T> &binarySearchTree);
+     //destructor (use postorder traversal)
+     ~BinarySearchTree();
+     //assignment operator
+     BinarySearchTree<T> &operator=(const BinarySearchTree<T> &binarySearchTree);
 };
 
 //   --kuaijie = "see you soon";

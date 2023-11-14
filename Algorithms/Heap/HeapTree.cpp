@@ -146,8 +146,8 @@ int HeapTree<T>::getGreaterChildIndex(int parentIndex) {
  * */
  template<typename T>
  void HeapTree<T>::printHeap() {
-     for(T elem:data){
-         std::cout << elem <<" ";
+     for (T elem:data) {
+         std::cout << elem << " ";
      }
      std::cout << "\n";
  }

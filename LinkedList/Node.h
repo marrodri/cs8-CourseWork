@@ -13,5 +13,4 @@ struct Node {
     Node<T> *previous = nullptr, *next = nullptr;
 };
 
-
 #endif //SPLIT_NODE_H

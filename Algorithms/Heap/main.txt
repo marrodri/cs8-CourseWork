@@ -1,0 +1,21 @@
+#include "Algorithms/Heap/HeapTree.h"
+
+int main(){
+    HeapTree<int> heap({3,71,5,32,4,23,24,42,1,46,57,44,0});
+
+    heap.printHeap();
+
+
+    std::cout <<"popping heap\n";
+    heap.pop();
+    heap.printHeap();
+
+    std::cout <<"popping heap\n";
+    heap.pop();
+    heap.printHeap();
+
+    std::cout <<"popping heap\n";
+    heap.pop();
+    heap.printHeap();
+}
+

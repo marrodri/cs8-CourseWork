@@ -1,0 +1,9 @@
+
+
+#include "Algorithms/NQueens/NQueens.h"
+
+
+int main() {
+    NQueens nQueens(5);
+    nQueens.solveNQueens(0);
+}

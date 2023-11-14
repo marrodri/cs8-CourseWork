@@ -14,17 +14,12 @@ template<typename T>
 BinarySearchTree<T>::BinarySearchTree() {
     root = nullptr;
     size = 0;
-    /**
-     * -
-     * -
-     * -
-     * -
-     **/
 }
 
 /**
  * private helpers
- * */
+ **/
+
 template<typename T>
 Node<T> *BinarySearchTree<T>::createNode(const T &item) {
     Node<T> *newNode = new Node<T>;
@@ -34,7 +29,7 @@ Node<T> *BinarySearchTree<T>::createNode(const T &item) {
 
 /**
  * binary search tree functions
- * */
+**/
 
 //public method
 template<typename T>
@@ -63,10 +58,10 @@ Node<T> *BinarySearchTree<T>::addNodeToTree(Node<T> *node,const T &val) {
 }
 
 
+
 //public method
 template<typename T>
 void BinarySearchTree<T>::remove(T data) {
-//    root=
     root=remove(root, data);
     size--;
 }
@@ -110,7 +105,6 @@ Node<T> *BinarySearchTree<T>::remove(Node<T> *curr, T data){
     }
     else{
         if(curr->data < data){
-
             curr->next = remove(curr->next, data);
         }
         else {
@@ -120,13 +114,13 @@ Node<T> *BinarySearchTree<T>::remove(Node<T> *curr, T data){
     return curr;
 }
 
-//TODO public method
+//public method
 template<typename T>
 bool BinarySearchTree<T>::search(const T &item) {
     return search(root, item);
 }
 
-//TODO: private method
+//private method
 template<typename T>
 bool BinarySearchTree<T>::search(Node<T> *curr, const T &item) {
     bool isFounded = false;
@@ -152,35 +146,87 @@ bool BinarySearchTree<T>::search(Node<T> *curr, const T &item) {
 
 
 /**
- * bst traversal functions
+ * bst iterator
 **/
+template<typename T>
+void BinarySearchTree<T>::iterateBinaryTree(void (*f)(T &), TreeTraversalEnum treeTraversal) {
+    switch(treeTraversal){
+    case PREORDER:
+        preorderIterator(f, root);
+        break;
+    case POSTORDER:
+        postorderIterator(f, root);
+        break;
+    case INORDER:
+        inorderIterator(f, root);
+        break;
+    default:
+        breathFirstOrderTraversal(f, root);
+        break;
+    }
+}
+
+
+/**
+ * private traversal functions
+ **/
 
 template<typename T>
-void BinarySearchTree<T>::postorderIterator(void(*f)(T& data)) {
-    std::cout << "calling infix traversal tree\n";
-    this->postorderIterator(f, root);
+void BinarySearchTree<T>::postorderIterator(void(*f)(T& data), Node<T> *curr) {
+    if (!curr->previous && !curr->next) {
+        f(curr->data);
+        return ;
+    }
+    if(curr) {
+        {
+            if (curr->previous) {
+                postorderIterator(f,curr->previous);
+            }
+
+            if (curr->next) {
+                postorderIterator(f,curr->next);
+            }
+            f(curr->data);
+        }
+    }
 }
 
 template<typename T>
-void BinarySearchTree<T>::preorderIterator(void(*f)(T& data)) {
-    std::cout << "calling infix traversal tree\n";
-    this->preorderIterator(f, root);
+void BinarySearchTree<T>::preorderIterator(void(*f)(T& data), Node<T> *curr) {
+    if (!curr->previous && !curr->next) {
+        f(curr->data);
+        return ;
+    }
+    if(curr) {
+        {
+            f(curr->data);
+            if (curr->previous) {
+                preorderIterator(f,curr->previous);
+            }
+            if (curr->next) {
+                preorderIterator(f,curr->next);
+            }
+        }
+    }
 }
 
 template<typename T>
-void BinarySearchTree<T>::inorderIterator(void(*f)(T& data)) {
-    std::cout << "calling infix traversal tree\n";
-    this->inorderIterator(f, root);
-}
-
-
-/*
- * binary search tree algorithms
- * */
-
-template<typename T>
-void BinarySearchTree<T>::breathFirstOrderTraversal(void(*f)(T& data)) {
-    breathFirstOrderTraversal(f, root);
+void BinarySearchTree<T>::inorderIterator(void(*f)(T& data), Node<T> *curr) {
+    if (!curr->previous && !curr->next) {
+        f(curr->data);
+        return ;
+    }
+    if(curr) {
+        {
+            if (curr->previous) {
+                inorderIterator(f,curr->previous);
+            }
+            f(curr->data);
+            if (curr->next) {
+                inorderIterator(f,curr->next);
+            }
+        }
+    }
 }
 
 template<typename T>
@@ -209,77 +255,102 @@ void BinarySearchTree<T>::breathFirstOrderTraversal(void (*f)(T &), Node<T> *roo
 }
 
 
+
 /**
- * private traversal functions
- **/
+ * big 3 helper functions
+ * */
 
 template<typename T>
-void BinarySearchTree<T>::postorderIterator(void(*f)(T& data), Node<T> *curr) {
-    if (!curr->previous && !curr->next) {
-        f(curr->data);
-        return ;
+Node<T> *BinarySearchTree<T>::preorderTreeCopy(Node<T> *node){
+    //TODO: create the preorderCopyTree
+    Node<T> *newNode = new Node<T>;
+    if (!node->previous && !node->next) {
+        newNode->data = node->data;
+        return  newNode;
     }
-    if(curr) {
+    if(node) {
         {
-            if (curr->previous) {
-                postfixIterator(f,curr->previous);
+            newNode->data = node->data;
+            if (node->previous) {
+                newNode->previous=preorderTreeCopy(node->previous);
             }
-
-            if (curr->next) {
-                postfixIterator(f,curr->next);
-            }
-            f(curr->data);
-        }
-    }
-}
-
-template<typename T>
-void BinarySearchTree<T>::preorderIterator(void(*f)(T& data), Node<T> *curr) {
-    if (!curr->previous && !curr->next) {
-        f(curr->data);
-        return ;
-    }
-    if(curr) {
-        {
-            f(curr->data);
-            if (curr->previous) {
-                prefixIterator(f,curr->previous);
-            }
-            if (curr->next) {
-                prefixIterator(f,curr->next);
+            if (node->next) {
+                newNode->next=preorderTreeCopy(node->next);
             }
         }
     }
+    return newNode;
 }
 
+
 template<typename T>
-void BinarySearchTree<T>::inorderIterator(void(*f)(T& data), Node<T> *curr) {
-    if (!curr->previous && !curr->next) {
-        f(curr->data);
-        return ;
-    }
-    if(curr) {
-        {
-            if (curr->previous) {
-                inorderIterator(f,curr->previous);
-            }
-            f(curr->data);
-            if (curr->next) {
-                inorderIterator(f,curr->next);
+void BinarySearchTree<T>::postorderTreeDestructor(Node<T> *node) {
+    if(node){
+        if (!node->previous && !node->next) {
+            node->data = 0;
+            delete(node);
+            node= nullptr;
+            return ;
+        }
+        else {
+            {
+                if (node->previous) {
+                    postorderTreeDestructor(node->previous);
+                }
+
+                if (node->next) {
+                    postorderTreeDestructor(node->next);
+                }
+                node->data = 0;
+                delete(node);
+                node= nullptr;
             }
         }
     }
 }
 
+/**
+ * operator overload.
+ * */
 
+template<typename T>
+BinarySearchTree<T> &BinarySearchTree<T>::operator+=(const T&data){
+    this->addNodeToTree(root,data);
+    return *this;
+}
 
+/**
+ * big 3 methods
+ * */
+//copy constructor.
+template<typename T>
+BinarySearchTree<T>::BinarySearchTree(const BinarySearchTree<T> &binarySearchTree) {
+    *this = binarySearchTree;
+}
 
-//logic for deleting code.
-/*if is leaf, delete
-     * --otherwise, node has 1 child; swap with child.
-     *    then call remove(child);
-     * --else node has z children;swap with
-     *    next successor. call remove under successor.
-     * **/
+template<typename T>
+void deleteNode(Node<T> &node){
+    delete(node);
+    node = nullptr;
+
+}
+template<typename T>
+BinarySearchTree<T>::~BinarySearchTree() {
+//    postorderIterator(deleteNode,root);
+    if(root){
+        postorderTreeDestructor(root);
+    }
+    this->root = nullptr;
+    this->size =0;
+}
+
+template<typename T>
+BinarySearchTree<T> &BinarySearchTree<T>::operator=(const BinarySearchTree<T> &binarySearchTree) {
+//    this->~BinarySearchTree();
+    //use preorder traversal for copying the bst.
+    this->root = preorderTreeCopy(binarySearchTree.root);
+    this->size = binarySearchTree.size;
+    return *this;
+}
 
 #endif

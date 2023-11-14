@@ -10,15 +10,12 @@
 //Reverse Polish Notation Calculator
 class RPN {
 private:
-    std::stack<double> stackInt;
-    std::stack<double> stackDouble;
+    std::stack<double> stack;
 
 public:
     double calculatePostFix(std::string &postFixOp);
-    double calculatePostFixDouble(std::string postFixOp);
 
     double doOperation(double left, double right, char op);
-    double calculateValueDouble(int op1, int op2);
 
 };
 

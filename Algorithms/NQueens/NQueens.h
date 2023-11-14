@@ -23,7 +23,6 @@ public:
     bool isPlaceValid(int x, int y);
     void solveNQueens(int n);
     void printBoard();
-    void writeBoard();
 };
 
 
