@@ -16,6 +16,9 @@ int firstGet(BTree<int> &tree, int value);
 void printBTree(BTree<int> *tree);
 int *find(BTree<int> *tree, int value);
 
+
+//bool found. when data[i] == entry. and i is lower than size.
+
 /**
  * TODOs
  **/
@@ -32,6 +35,23 @@ BTree<int> *looseInsertValue(BTree<int> *tree, int value);
 
 //fixExcess: organize the tree in the proper way. check this in class.
 void fixExcess(BTree<int> *tree);
+
+
+
+/**
+ * array functions
+ * */
+ void shiftLeft(int *arr[]);
+ void shiftRight(int *arr[]);
+
+
+ //array functions to define.
+ //split data: divide the array by 2, and take the first half ...
+// insert:()
+// remove:()
+
+//bring the middle guy up, and keep the other data in the child.
+//just use the same array functions from the library.
 
 //
 void removeValue(BTree<int> *tree, int target);

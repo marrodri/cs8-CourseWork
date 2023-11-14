@@ -1,0 +1,55 @@
+#include <iostream>
+#include "Algorithms/BTree/BTree.h"
+#include "Algorithms/BTree/functions.h"
+
+int main(){
+    BTree<int> *bt = new BTree<int>;
+
+//    bt->data[0]=20;
+//    bt->data[1]=30;
+//    bt->data[2]=40;
+//    bt->data[3]=50;
+//    int a = firstGet(*bt, 10);//0
+//    int b = firstGet(*bt, 25);//1
+//    int c = firstGet(*bt, 40);//2
+//    int d = firstGet(*bt, 45);//3
+//    int e = firstGet(*bt, 50);//3
+//    int f = firstGet(*bt, 90);//4
+//checkpoint for seeing firstGet is working.
+
+    makeTree(*bt); //GOOD so far.
+
+
+    printBTree(bt);
+    std::cout << std::endl;
+//checkpoint see if the bt has data added
+//from maketree.
+
+    int *ptr = find(bt,2000);
+    if(ptr){
+        *ptr = 80;
+    }
+    printBTree(bt);
+    std::cout << std::endl;
+
+    //values that work, 999, 24, 249
+    //values 850, 160, 2000 are not being properly added, b/c 0s are putted.
+
+    //found the bug, it's related to firstGet().
+    // it goes between dataSize and dataCount.
+    //this is probably the common problem that barkeshley mentioned, that
+    //once trying to add a value that is very high, it's not putted properly.
+    //THIS IS GOOD TO GO :)
+    insertValue(bt, 2000);
+    //this is not added. probably with fixExcess will fix the problem.
+    //as it just only adds values but not children to even out the tree.
+    insertValue(bt, 999);
+    insertValue(bt, 850);
+    insertValue(bt, 24);
+
+    printBTree(bt);
+    std::cout << std::endl;
+
+    //START THE PRINTING FUNCTION.
+    return 0;
+}

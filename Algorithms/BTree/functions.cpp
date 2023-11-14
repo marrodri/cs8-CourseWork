@@ -89,10 +89,7 @@ BTree<int> *looseInsertValue(BTree<int> *tree, int value) {
         if (tree->child_count == 0) {
             // insert the item. if the data is full, create a child, in the
             //right index, and add it in the new child.
-            //
             if (tree->data_count < tree->size){
-
-
                 //if the desired value is lower than the current value.
                 //shift the current value to left, and add the desired
                 //value to the current index.
@@ -162,7 +159,6 @@ void makeTree(BTree<int> &tree) {
     firstDepthMidChildPointer->data_count=1;
     firstDepthMidChildPointer->child_count=2;
 
-
     //    2child for the firstDepthMidChildPointer
     firstDepthMidChildPointer->subset[0] = new BTree<int>;
     firstDepthMidChildPointer->subset[2] = new BTree<int>;
@@ -175,7 +171,6 @@ void makeTree(BTree<int> &tree) {
     midSecondLevelFirstChild->data_count =1;
     midSecondLevelThirdChild->data[0]=250;
     midSecondLevelThirdChild->data_count=1;
-
 
     //firstDepthLeftChildPointer
     BTree<int> *firstDepthRightChildPointer = tree.subset[2];
